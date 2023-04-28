@@ -40,7 +40,7 @@ public class Order {
         return hh+":"+mm;
     }
     public int getDeliveryTime() {
-        return deliveryTime;
+        return this.deliveryTime;
     }
 
 }

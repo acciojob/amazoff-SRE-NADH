@@ -63,6 +63,7 @@ OrderRepocitory repo;
     public List<String> getOrdersByPartnerId(String partnerId) {
         if (repo.checkPartnerinPair(partnerId)) {
             List<String> tmp = repo.getOrdersByPartnerId(partnerId);
+            return tmp;
         }
         return null;
     }
@@ -96,17 +97,20 @@ OrderRepocitory repo;
     }
 
     public String getLastDeliveryTimeByPartnerId(String partnerId) {
-        List<String> tmp = repo.getOrdersByPartnerId(partnerId);
-        int max=0;
-        for(String x:tmp){
-            Optional<Order> opt=repo.checkOrderId(x);
-            Order order = opt.get();
-            int time =order.getDeliveryTime();
-            if(time>max){
-                max=time;
+        if(repo.checkPartnerinPair(partnerId)) {
+            List<String> tmp = repo.getOrdersByPartnerId(partnerId);
+            int max = 0;
+            for (String x : tmp) {
+                Optional<Order> opt = repo.checkOrderId(x);
+                Order order = opt.get();
+                int time = order.getDeliveryTime();
+                if (time > max) {
+                    max = time;
+                }
             }
+            return Order.getStringDeliveryTime(max);
         }
-        return Order.getStringDeliveryTime(max);
+        return "there is no orders for this partnerid";
     }
 
     public void deletePartnerById(String partnerId) {
@@ -119,19 +123,14 @@ OrderRepocitory repo;
     }
 
     public void deleteOrderById(String orderId) {
-        String partnerId = repo.getPartnerinOrderMap(orderId);
-         repo.removeOrderIdinpartnerPair(partnerId,orderId);
-         repo.removeinOrderPartnerPair(orderId);
-         repo.removeOrder(orderId);
+        if(repo.idcontainsorderpartner(orderId)) {
+            String partnerId = repo.getPartnerinOrderMap(orderId);
+            repo.removeOrderIdinpartnerPair(partnerId, orderId);
+            repo.removeinOrderPartnerPair(orderId);
+        }
+        Optional<Order> opt = repo.checkOrderId(orderId);
+        if(opt.isPresent()) {
+            repo.removeOrder(orderId);
+        }
     }
-
-
-
-
-//    private int convertDeliveryTime(String time){
-//        List<String> arr = Arrays.asList(time.split(":"));
-//        int HH = Integer.parseInt(arr.get(0));
-//        int MM = Integer.parseInt(arr.get(1));
-//        return HH*60+MM;
-//    }
 }

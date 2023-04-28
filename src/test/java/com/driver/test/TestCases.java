@@ -17,5 +17,4 @@ import java.util.List;
 @SpringBootTest(classes = Application.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCases {
-
 }

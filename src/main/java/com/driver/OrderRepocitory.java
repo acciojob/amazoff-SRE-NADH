@@ -123,4 +123,8 @@ Map<String,String> OrderPartnerMap = new HashMap<>();
     public void removeOrder(String orderId) {
         orderMap.remove(orderId);
     }
+
+    public boolean idcontainsorderpartner(String orderId) {
+        return OrderPartnerMap.containsKey(orderId);
+    }
 }

@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
     @Autowired
     OrderService service;
-    @PostMapping("/add-order")
+    @PostMapping("/add-order") //localhost:8098/orders/add-order
     public ResponseEntity<String> addOrder(@RequestBody Order order){
         service.addOrder(order);
         return new ResponseEntity<>("New order added successfully", HttpStatus.CREATED);
     }
 
-    @PostMapping("/add-partner/{partnerId}")
+    @PostMapping("/add-partner/{partnerId}") //localhost:8098/orders/add-partner/{partnerId}?id=356
         public ResponseEntity<String> addPartner(@PathVariable String partnerId){
         service.addPartner(partnerId);
         return new ResponseEntity<>("New delivery partner added successfully", HttpStatus.CREATED);
