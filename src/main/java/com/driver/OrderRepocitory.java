@@ -118,6 +118,8 @@ Map<String,String> OrderPartnerMap = new HashMap<>();
             }
         }
         PartnerOrderMap.put(partnerId,tmp);
+       int no = partnerMap.get(partnerId).getNumberOfOrders();
+       partnerMap.get(partnerId).setNumberOfOrders(no-1);
     }
 
     public void removeOrder(String orderId) {
