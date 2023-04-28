@@ -112,6 +112,7 @@ Map<String,String> OrderPartnerMap = new HashMap<>();
                 tmp.remove(x);
             }
         }
+        PartnerOrderMap.put(partnerId,tmp);
     }
 
     public void removeOrder(String orderId) {
