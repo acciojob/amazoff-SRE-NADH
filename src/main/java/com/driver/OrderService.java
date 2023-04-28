@@ -12,10 +12,18 @@ public class OrderService {
 @Autowired
 OrderRepocitory repo;
     public void addOrder(Order order) {
+        Optional<Order> optOrder = repo.checkOrderId(order.getId());
+        if(optOrder.isPresent()){
+            return;
+        }
         repo.addOrder(order);
     }
 
     public void addPartner(String partnerId) {
+        Optional<DeliveryPartner> optPartner = repo.checkPartnerId(partnerId);
+        if(optPartner.isPresent()){
+            return;
+        }
         repo.addPartner(new DeliveryPartner(partnerId));
     }
 

@@ -11,8 +11,13 @@ HashMap<String,DeliveryPartner> partnerMap= new HashMap<>();
 Map<String,List<String>> PartnerOrderMap = new HashMap<>();
 Map<String,String> OrderPartnerMap = new HashMap<>();
 
+    public OrderRepocitory() {
+        orderMap = new HashMap<>();
+        partnerMap = new HashMap<>();
+        PartnerOrderMap = new HashMap<>();
+        OrderPartnerMap = new HashMap<>();
+    }
     public void addOrder(Order order) {
-
         orderMap.put(order.getId(),order);
     }
 

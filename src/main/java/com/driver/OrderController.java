@@ -27,7 +27,7 @@ public class OrderController {
     }
 
     @PostMapping("/add-partner/{partnerId}")
-    public ResponseEntity<String> addPartner(@PathVariable String partnerId){
+        public ResponseEntity<String> addPartner(@PathVariable String partnerId){
         service.addPartner(partnerId);
         return new ResponseEntity<>("New delivery partner added successfully", HttpStatus.CREATED);
     }
@@ -35,7 +35,7 @@ public class OrderController {
     @PutMapping("/add-order-partner-pair")
     public ResponseEntity<String> addOrderPartnerPair(@RequestParam String orderId, @RequestParam String partnerId){
           service.addOrderPartner(orderId,partnerId);
-        //This is basically assigning that order to that partnerId
+         //This is basically assigning that order to that partnerId
         return new ResponseEntity<>("New order-partner pair added successfully", HttpStatus.CREATED);
     }
 
