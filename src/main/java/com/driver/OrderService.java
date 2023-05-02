@@ -85,7 +85,7 @@ OrderRepocitory repo;
         }
         List<String> tmp = repo.getOrdersByPartnerId(partnerId);
         int count=0;
-        int Time=Order.convertDeliveryTime(time);
+        int Time=Timeutils.convertDeliveryTime(time);
         for(String x:tmp){
             Optional<Order> opt=repo.checkOrderId(x);
             Order order = opt.get();
@@ -108,7 +108,7 @@ OrderRepocitory repo;
                     max = time;
                 }
             }
-            return Order.getStringDeliveryTime(max);
+            return Timeutils.getStringDeliveryTime(max);
         }
         return "there is no orders for this partnerid";
     }
