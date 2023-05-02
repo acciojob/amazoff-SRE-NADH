@@ -80,12 +80,12 @@ OrderRepocitory repo;
     }
 
     public Integer getOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
-        if(repo.checkPartnerinPair(partnerId)){
+        if(!repo.checkPartnerinPair(partnerId)){
             return 0;
         }
         List<String> tmp = repo.getOrdersByPartnerId(partnerId);
         int count=0;
-        int Time=Timeutils.convertDeliveryTime(time);
+        int Time=Order.convertDeliveryTime(time);
         for(String x:tmp){
             Optional<Order> opt=repo.checkOrderId(x);
             Order order = opt.get();
@@ -108,7 +108,7 @@ OrderRepocitory repo;
                     max = time;
                 }
             }
-            return Timeutils.getStringDeliveryTime(max);
+            return  Order.getStringDeliveryTime(max);
         }
         return "there is no orders for this partnerid";
     }
