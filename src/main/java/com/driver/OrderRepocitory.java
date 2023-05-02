@@ -68,10 +68,12 @@ Map<String,String> OrderPartnerMap;
     }
 
     public Integer findlength(String partnerId) {
+
         return PartnerOrderMap.get(partnerId).size();
     }
 
     public List<String> getOrdersByPartnerId(String id) {
+
         return PartnerOrderMap.get(id);
     }
 
@@ -112,11 +114,7 @@ Map<String,String> OrderPartnerMap;
 
     public void removeOrderIdinpartnerPair(String partnerId, String orderId) {
         List<String> tmp = PartnerOrderMap.get(partnerId);
-        for(String x:tmp){
-            if(x.equals(orderId)){
-                tmp.remove(x);
-            }
-        }
+        tmp.remove(orderId);
         PartnerOrderMap.put(partnerId,tmp);
        int no = partnerMap.get(partnerId).getNumberOfOrders();
        partnerMap.get(partnerId).setNumberOfOrders(no-1);

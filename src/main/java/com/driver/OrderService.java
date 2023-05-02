@@ -114,6 +114,10 @@ OrderRepocitory repo;
     }
 
     public void deletePartnerById(String partnerId) {
+        Optional<DeliveryPartner> ne = repo.checkPartnerId(partnerId);
+        if(ne.isEmpty()){
+            return;
+        }
         List<String> tmp = repo.getOrdersByPartnerId(partnerId);
         for(String x:tmp){
             repo.removeinOrderPartnerPair(x);
@@ -123,14 +127,15 @@ OrderRepocitory repo;
     }
 
     public void deleteOrderById(String orderId) {
-        if(repo.idcontainsorderpartner(orderId)) {
-            String partnerId = repo.getPartnerinOrderMap(orderId);
-            repo.removeOrderIdinpartnerPair(partnerId, orderId);
-            repo.removeinOrderPartnerPair(orderId);
+        Optional<Order> opt1 = repo.checkOrderId(orderId);
+        if(opt1.isPresent()) {
+           String partnerId = repo.getPartnerinOrderMap(orderId);
+           if(partnerId!=null) {
+               repo.removeOrderIdinpartnerPair(partnerId, orderId);
+               repo.removeinOrderPartnerPair(orderId);
+           }
+        repo.removeOrder(orderId);
         }
-        Optional<Order> opt = repo.checkOrderId(orderId);
-        if(opt.isPresent()) {
-            repo.removeOrder(orderId);
-        }
+
     }
 }
