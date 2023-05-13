@@ -21,6 +21,7 @@ public class Order {
     public void setDeliveryTime(int deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
+    // used to get and set variable
     public  void setDeliveryTime(String time){
         this.deliveryTime=convertDeliveryTime(time);
     }
